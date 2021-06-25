@@ -22,6 +22,7 @@ pub fn main() {
 
     let mut math_function = math_func::MathFunc::new();
     let mut arrow_key_state: f64 = 0.0;
+    let mut pause = false;
     
     'running: loop {
         for event in event_pump.poll_iter() {
@@ -36,6 +37,9 @@ pub fn main() {
                 Event::KeyDown { keycode: Some(Keycode::Down), .. } => {
                     arrow_key_state = -0.1;
                 },
+                Event::KeyDown { keycode: Some(Keycode::P), .. } => {
+                    pause = !pause;
+                },
                 Event::KeyUp { keycode: Some(Keycode::Up), repeat: false, .. } | Event::KeyUp { keycode: Some(Keycode::Down), repeat: false, .. } => {
                     arrow_key_state = 0.0;
                 }
@@ -46,8 +50,11 @@ pub fn main() {
         canvas.set_draw_color(Color::RGB(255, 255, 255));
         canvas.clear();
 
-        math_function.change_slope(arrow_key_state);
-        math_function.add_value_from_slope();
+        if !pause {
+            math_function.change_slope(arrow_key_state);
+            math_function.add_value_from_slope();
+        }
+
         math_function.draw(&mut canvas);
 
         canvas.present();
