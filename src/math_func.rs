@@ -29,7 +29,7 @@ impl MathFunc {
             canvas.set_draw_color(Color::RGB(255, 0, 0));
             canvas.draw_point(Point::new(x as i32, 300 - *value as i32)).unwrap();
             canvas.set_draw_color(Color::RGB(0, 255, 0));
-            canvas.draw_point(Point::new(x as i32, 300 - (self.slope_at(x) * 20.0) as i32)).unwrap();
+            canvas.draw_point(Point::new(x as i32, 300 - (self.slope_at(x) * 10.0) as i32)).unwrap();
         }
 
         canvas.set_draw_color(Color::RGB(0, 0, 255));
